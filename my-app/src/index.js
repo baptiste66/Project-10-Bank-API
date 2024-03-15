@@ -5,12 +5,13 @@ import Index from './pages/index';
 import SignIn from './pages/sign-in';
 import User from './pages/user';
 import'../src/style/main.css'
-
-
+import { Provider } from 'react-redux';
+import store from '../src/redux/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(  
     <React.StrictMode>
+      <Provider store={store}>
         <Router basename="/">      
           <Routes>
             <Route exact path="/" element={<Index />} />
@@ -19,5 +20,6 @@ root.render(
             <Route path="*" element={<SignIn />} />
           </Routes>
         </Router>
+      </Provider>
     </React.StrictMode>
 );

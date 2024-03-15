@@ -1,5 +1,8 @@
 import React from 'react';
 import argentBankLogo from '../assets/argentBankLogo.png';
+import { Link } from 'react-router-dom';
+ 
+
 
 
 function User() {
@@ -17,23 +20,23 @@ function User() {
       </head>
       <body>
         <nav className="main-nav">
-          <a className="main-nav-logo" href="./index.html">
+        <Link className="main-nav-logo" to="/">
             <img
               className="main-nav-logo-image"
               src={argentBankLogo}
               alt="Argent Bank Logo"
             />
             <h1 className="sr-only">Argent Bank</h1>
-          </a>
+          </Link>
           <div>
-            <a className="main-nav-item" href="./user.html">
+            <Link className="main-nav-item" to="/user">
               <i className="fa fa-user-circle"></i>
               Tony
-            </a>
-            <a className="main-nav-item" href="./index.html">
+            </Link>
+            <Link className="main-nav-item" to="/signin">
               <i className="fa fa-sign-out"></i>
               Sign Out
-            </a>
+            </Link>
           </div>
         </nav>
         <main className="main bg-dark">
