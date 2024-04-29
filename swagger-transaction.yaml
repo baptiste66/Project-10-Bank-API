@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation transactions
+  description: Contains the API endpoints for the transactions in this codebase
+  version: 1.0.0
+  termsOfService: http://swagger.io/terms/
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - transaction
+      summary: Transactions
+      description: view all transactions for the current month, grouped by account
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach userID
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: transaction have loaded
+          schema:
+            $ref: '#/definitions/transactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description:  Server Error
+  /transactions/details:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - transaction 
+      summary: Details
+      description: show transaction details.
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach userID
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: details have been loaded
+          schema:
+            $ref: '#/definitions/detailsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description:  Server Error
+  /transactions/details/category:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - transaction 
+      summary: Update Category
+      description: update category
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach userID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: category loaded
+          required: true
+          schema:
+            $ref: '#/definitions/category'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: category is modified
+          schema:
+            $ref: '#/definitions/categoryResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - transaction 
+      summary: Delete Category
+      description: Deletes the category 
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach userID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Note loaded
+          required: true
+          schema:
+            $ref: '#/definitions/category'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Deletion successful
+          schema:
+            $ref: '#/definitions/categoryDeleteResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description:  Server Error
+  /transactions/details/note:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - transaction 
+      summary: Update Note
+      description: Update note
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach userID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Note loaded
+          required: true
+          schema:
+            $ref: '#/definitions/note'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Note has  updated
+          schema:
+            $ref: '#/definitions/noteResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - transaction
+      summary: Delete Note
+      description: deletes the note entered by the user
+      parameters:
+        - in: body
+          name: body
+          description: Note loaded
+          required: true
+          schema:
+            $ref: '#/definitions/note'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Deletion successful
+          schema:
+            $ref: '#/definitions/noteDeleteResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  category:
+    properties:
+      category:
+        type: string
+        description: user category
+  note:
+    properties:
+      note:
+        type: string
+        description: user category
+  transactionsResponse:
+    type: object
+    properties:
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: integer
+      balance:
+        type: integer
+  detailsResponse:
+    type: object
+    properties:
+      transaction type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+  categoryResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      category:
+        type: string
+  categoryDeleteResponse:
+    type: object
+    properties:
+      category:
+        type: object
+  noteResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      note:
+        type: string
+  noteDeleteResponse:
+    type: object
+    properties:
+      note:
+        type: object

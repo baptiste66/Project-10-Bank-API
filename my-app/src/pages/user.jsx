@@ -1,7 +1,6 @@
 import React from 'react';
-import argentBankLogo from '../assets/argentBankLogo.png';
-import { Link } from 'react-router-dom';
- 
+ import Header from '../components/header/header'
+ import DisplayNames from '../components/displayName/displayName';
 
 
 
@@ -19,31 +18,9 @@ function User() {
         />
       </head>
       <body>
-        <nav className="main-nav">
-        <Link className="main-nav-logo" to="/">
-            <img
-              className="main-nav-logo-image"
-              src={argentBankLogo}
-              alt="Argent Bank Logo"
-            />
-            <h1 className="sr-only">Argent Bank</h1>
-          </Link>
-          <div>
-            <Link className="main-nav-item" to="/user">
-              <i className="fa fa-user-circle"></i>
-              Tony
-            </Link>
-            <Link className="main-nav-item" to="/signin">
-              <i className="fa fa-sign-out"></i>
-              Sign Out
-            </Link>
-          </div>
-        </nav>
+<Header />
         <main className="main bg-dark">
-          <div className="header">
-            <h1>Welcome back<br />Tony Jarvis!</h1>
-            <button className="edit-button">Edit Name</button>
-          </div>
+         <DisplayNames />
           <section className="account">
             <div className="account-content-wrapper">
               <h3 className="account-title">Argent Bank Checking (x8349)</h3>
