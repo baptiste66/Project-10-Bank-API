@@ -16,7 +16,7 @@ paths:
       tags:
         - transaction
       summary: Transactions
-      description: view all transactions for the current month, grouped by account
+      description: View all transactions for the current month, grouped by account.
       parameters:
         - in: header
           name: Authorization
@@ -27,55 +27,65 @@ paths:
         - application/json
       responses:
         '200':
-          description: transaction have loaded
+          description: Transactions have been loaded.
           schema:
             $ref: '#/definitions/transactionsResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description:  Server Error
-  /transactions/details:
+          description: Server Error.
+  /transactions/{transactionId}:
     get:
       security:
         - Bearer: []
       tags:
-        - transaction 
+        - transaction
       summary: Details
-      description: show transaction details.
+      description: Show transaction details.
       parameters:
         - in: header
           name: Authorization
           description: Attach userID
           required: true
           type: string
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction
       produces:
         - application/json
       responses:
         '200':
-          description: details have been loaded
+          description: Details have been loaded.
           schema:
             $ref: '#/definitions/detailsResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description:  Server Error
-  /transactions/details/category:
+          description: Server Error.
+  /transactions/details/category/{categoryId}:
     patch:
       security:
         - Bearer: []
       tags:
-        - transaction 
+        - transaction
       summary: Update Category
-      description: update category
+      description: Update category.
       parameters:
         - in: header
           name: Authorization
           description: Attach userID
           required: true
           type: string
+        - in: path
+          name: categoryId
+          required: true
+          type: string
+          description: ID of the category
         - in: body
           name: body
-          description: category loaded
+          description: Category to be updated
           required: true
           schema:
             $ref: '#/definitions/category'
@@ -83,60 +93,64 @@ paths:
         - application/json
       responses:
         '200':
-          description: category is modified
+          description: Category is modified.
           schema:
             $ref: '#/definitions/categoryResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description: Server Error
+          description: Server Error.
     delete:
       security:
         - Bearer: []
       tags:
-        - transaction 
+        - transaction
       summary: Delete Category
-      description: Deletes the category 
+      description: Deletes the category.
       parameters:
         - in: header
           name: Authorization
           description: Attach userID
           required: true
           type: string
-        - in: body
-          name: body
-          description: Note loaded
+        - in: path
+          name: categoryId
           required: true
-          schema:
-            $ref: '#/definitions/category'
+          type: string
+          description: ID of the category
       produces:
         - application/json
       responses:
         '200':
-          description: Deletion successful
+          description: Deletion successful.
           schema:
             $ref: '#/definitions/categoryDeleteResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description:  Server Error
-  /transactions/details/note:
+          description: Server Error.
+  /transactions/details/note/{noteId}:
     patch:
       security:
         - Bearer: []
       tags:
-        - transaction 
+        - transaction
       summary: Update Note
-      description: Update note
+      description: Update note.
       parameters:
         - in: header
           name: Authorization
           description: Attach userID
           required: true
           type: string
+        - in: path
+          name: noteId
+          required: true
+          type: string
+          description: ID of the note
         - in: body
           name: body
-          description: Note loaded
+          description: Note to be updated
           required: true
           schema:
             $ref: '#/definitions/note'
@@ -144,38 +158,42 @@ paths:
         - application/json
       responses:
         '200':
-          description: Note has  updated
+          description: Note has been updated.
           schema:
             $ref: '#/definitions/noteResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description: Server Error
+          description: Server Error.
     delete:
       security:
         - Bearer: []
       tags:
         - transaction
       summary: Delete Note
-      description: deletes the note entered by the user
+      description: Deletes the note entered by the user.
       parameters:
-        - in: body
-          name: body
-          description: Note loaded
+        - in: header
+          name: Authorization
+          description: Attach userID
           required: true
-          schema:
-            $ref: '#/definitions/note'
+          type: string
+        - in: path
+          name: noteId
+          required: true
+          type: string
+          description: ID of the note
       produces:
         - application/json
       responses:
         '200':
-          description: Deletion successful
+          description: Deletion successful.
           schema:
             $ref: '#/definitions/noteDeleteResponse'
         '400':
-          description: Invalid Fields
+          description: Invalid Fields.
         '500':
-          description: Server Error
+          description: Server Error.
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -183,15 +201,17 @@ securityDefinitions:
     in: header
 definitions:
   category:
+    type: object
     properties:
       category:
         type: string
-        description: user category
+        description: User category
   note:
+    type: object
     properties:
       note:
         type: string
-        description: user category
+        description: User note
   transactionsResponse:
     type: object
     properties:
@@ -206,7 +226,7 @@ definitions:
   detailsResponse:
     type: object
     properties:
-      transaction type:
+      transactionType:
         type: string
       category:
         type: string
